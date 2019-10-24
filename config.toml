@@ -1,4 +1,4 @@
-baseURL = "http://pwntester.com/"
+baseURL = "http://www.pwntester.com/"
 languageCode = "en-us"
 title = "</pwntester>"
 theme = "hugo-nuo"
