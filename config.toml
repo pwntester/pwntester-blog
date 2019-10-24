@@ -1,0 +1,34 @@
+baseURL = "http://pwntester.com/"
+languageCode = "en-us"
+title = "</pwntester>"
+theme = "hugo-nuo"
+
+[permalinks]
+  post = "/blog/:year/:month/:day/:slug/"
+
+[[menu.main]]
+  name = "Blog"
+  weight = 10
+  identifier = "blog"
+  url = "/post"
+
+[[menu.main]]
+  name = "Works"
+  weight = 20
+  identifier = "works"
+  url = "https://github.com/pwntester"
+
+[[menu.main]]
+  name = "Tags"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+
+# Add your own params here
+[params]
+  author = "Alvaro Muñoz"
+  avatar = "images/avatar.jpeg"
+  email = "alvaro@pwntester.com"
+  github = "pwntester"
+  twitter = "pwntester"
+  linkedin = "alvaroms"
