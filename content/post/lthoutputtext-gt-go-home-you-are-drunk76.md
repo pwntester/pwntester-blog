@@ -6,7 +6,7 @@ description = ""
 draft = false
 slug = "lthoutputtext-gt-go-home-you-are-drunk76"
 tags = ["JSF", "outputText"]
-title = "&lt;h:outputText/&gt; go home you are drunk!"
+title = "<h:outputText/> go home you are drunk!"
 
 +++
 
@@ -14,7 +14,7 @@ This is just a copy of the post I wrote in the [HP corporate blog](http://h30499
 
 While working on a JSF (Java Server Faces) test case recently I had one of those WAT?!?! moments - where something you take for granted starts behaving in a completely different way from how you expect. In this case it was even worse, since the behavior I was observing was breaking my application security and undermining the trust I place on libraries and frameworks as a developer.
 
-##The good
+## The good
 
 The http://java.sun.com/jsf/html/outputText tag renders basic text on your JSF page. You can customize the appearance of the text using CSS styles, in which case the generated text is wrapped in an HTML &lt;span&gt; element. What developers know and trust is that by default the &lt;h:outputText&gt; tag encodes the rendered text if it contains sensitive HTML and XML characters, making it safe for an HTML context.
 
@@ -32,7 +32,7 @@ The following example is XSS safe:
 </html>
 ```
 
-##The bad
+## The bad
 
 What is less known - and undocumented - is that within &lt;script&gt; and &lt;style&gt; blocks, &lt;h:outputText&gt; and other similar tags like &lt;h:outputLabel&gt; disable their HTML encoding, making the following example XSS vulnerable:
 
@@ -52,7 +52,7 @@ What is less known - and undocumented - is that within &lt;script&gt; and &lt;st
 
 This can be dangerous if developers are not aware of this behavior and trust &lt;h:outputText&gt; encoding beyond its own capabilities.
 
-##The ugly
+## The ugly
 
 The HP Software Security Research Group found that &lt;h:outputText&gt; tags immediately following &lt;script&gt; or &lt;style&gt; blocks are not encoded either making the following example XSS vulnerable:
 
@@ -104,13 +104,13 @@ We decided to disclose these issues before the release of the patched version as
 
 CVE Id assigned is CVE-2013-5855.
 
-##Workaround
+## Workaround
 
 JSF won’t escape raw EL expressions or the &lt;h:outputText&gt; tag family within &lt;script&gt; or &lt;style&gt; blocks, so manual encoding is required if untrusted data is used in these contexts. We recommend using Javascript context encoders like the one in OWASP ESAPI
 
 Also, make sure you are either using a patched JSF version, or that every &lt;/script&gt; element has at least one intervening markup element present between it and the next EL expression, either embedded in the page, or on the right hand side of an attribute in a JSF UI Component Tag.
 
 
-##Conclusion
+## Conclusion
 
 As developers we trust the libraries and frameworks we use to build our applications, and since we depend on them so strongly we don’t really have a choice. This puts the risk and responsibility on us to monitor the component projects we use and make sure we update to the latest versions when serious quality or security issues are found.
